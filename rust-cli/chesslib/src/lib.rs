@@ -1,11 +1,11 @@
 mod board;
+mod color;
 mod context;
 mod moves;
 mod piece;
-mod color;
 
 pub use board::*;
+pub use color::*;
 pub use context::*;
 pub use moves::*;
 pub use piece::*;
-pub use color::*;

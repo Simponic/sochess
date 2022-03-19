@@ -77,20 +77,24 @@ RNBQKBNR
         self.squares.get_mut(x * 8 + y)
     }
 
-    pub fn execute(&mut self, m: Move) -> Result<(), MovementError> {
-        let from = self[m.before()];
-        let to = self[m.after()];
+    pub fn execute(&mut self, m: Move) -> Result<(), String> {
+        let before = m.before();
+        let after = m.after();
+        let from = self[before];
+        let to = self[after];
 
         if let BoardSquare::Full(_) = from {
             if let BoardSquare::Full(_) = to {
-                self[m.before()] = to;
-                self[m.after()] = from;
+                self[before] = to;
+                self[after] = from;
                 Ok(())
             } else {
-                Err(MovementError::Occupied)
+                let (x, y) = after;
+                Err(format!("After location ({x}, {y}) is occupied."))
             }
         } else {
-            Err(MovementError::PieceDoesNotExist)
+            let (x, y) = before;
+            Err(format!("Before location ({x}, {y}) is vacant."))
         }
     }
 }
