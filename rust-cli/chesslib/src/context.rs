@@ -6,3 +6,5 @@ pub struct Context {
     turn: Color,
 }
 
+impl Context {
+}
