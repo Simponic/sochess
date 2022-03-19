@@ -1,6 +1,6 @@
 # SoChess is Web-Socket Chess
 
-This is a project for HackUSU 2022 using MongoDB, Express, and Rust for a CLI client that we were hoping to use a SocketIO binding with..
+This is a project for HackUSU 2022 using MongoDB, Express, and Rust for a CLI client that we were hoping to use a SocketIO binding with.
 
 Is @CodeTriangle proud of the work done for the Rust chess CLI? Yes. And it looks really good I must say.
 
