@@ -1,4 +1,4 @@
-use std::ops::{Index, IndexMut, Deref};
+use std::ops::{Deref, Index, IndexMut};
 
 use crate::{ColoredPiece, Move, MovementError};
 
@@ -30,7 +30,7 @@ pub struct Board {
 impl Board {
     pub fn standard() -> Board {
         Board::from_board_string(
-r#"
+            r#"
 rnbqkbnr
 pppppppp
 
@@ -39,15 +39,18 @@ pppppppp
 
 PPPPPPPP
 RNBQKBNR
-"#
-        ).unwrap()
+"#,
+        )
+        .unwrap()
     }
 
     pub fn from_board_string<S: Deref<Target = str>>(s: S) -> Result<Board, String> {
         let mut squares = [BoardSquare::Empty; 64];
         let mut count = 0;
         for ch in s.chars() {
-            if ch == ' ' { count += 1; }
+            if ch == ' ' {
+                count += 1;
+            }
             if !ch.is_ascii_whitespace() {
                 squares[count] = ch.try_into()?;
                 count += 1;
@@ -96,24 +99,28 @@ impl Index<(usize, usize)> for Board {
     type Output = BoardSquare;
 
     fn index(&self, index: (usize, usize)) -> &Self::Output {
-        &self.get(index.0, index.1).expect("Array index out of bounds")
+        &self
+            .get(index.0, index.1)
+            .expect("Array index out of bounds")
     }
 }
 
 impl IndexMut<(usize, usize)> for Board {
     fn index_mut(&mut self, index: (usize, usize)) -> &mut Self::Output {
-        self.get_mut(index.0, index.1).expect("Array index out of bounds")
+        self.get_mut(index.0, index.1)
+            .expect("Array index out of bounds")
     }
 }
 
 #[cfg(test)]
 mod test {
-    use crate::{Board, BoardSquare};
     use crate::ColoredPiece;
     use crate::Piece::*;
+    use crate::{Board, BoardSquare};
     #[test]
     fn trivial_board() {
-        let stringed = Board::from_board_string(r#"
+        let stringed = Board::from_board_string(
+            r#"
 P q  R p
 P q  R p
 P q  R p
@@ -122,7 +129,9 @@ P q  R p
 P q  R p
 P q  R p
 P q  R p
-"#).unwrap();
+"#,
+        )
+        .unwrap();
         let wp = ColoredPiece::white(Pawn).into();
         let wr = ColoredPiece::white(Rook).into();
         let bp = ColoredPiece::black(Pawn).into();
@@ -130,10 +139,10 @@ P q  R p
         let mut arr = [BoardSquare::Empty; 64];
 
         for i in 0..=7 {
-            arr[i*8] = wp;
-            arr[i*8+2] = bq;
-            arr[i*8+5] = wr;
-            arr[i*8+7] = bp;
+            arr[i * 8] = wp;
+            arr[i * 8 + 2] = bq;
+            arr[i * 8 + 5] = wr;
+            arr[i * 8 + 7] = bp;
         }
 
         assert_eq!(stringed, Board { squares: arr });

@@ -1,4 +1,3 @@
-
 use crate::{Board, Color};
 
 pub struct Context {
@@ -6,5 +5,4 @@ pub struct Context {
     turn: Color,
 }
 
-impl Context {
-}
+impl Context {}

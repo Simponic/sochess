@@ -7,18 +7,19 @@ pub struct Move {
 }
 
 impl Move {
-    pub fn with_coords(before: (usize, usize), after: (usize, usize)) -> Result<Move, MovementError> {
+    pub fn with_coords(
+        before: (usize, usize),
+        after: (usize, usize),
+    ) -> Result<Move, MovementError> {
         let (x1, y1) = before;
         let (x2, y2) = after;
 
-        if x1 > 7 || y1 > 7  {
+        if x1 > 7 || y1 > 7 {
             Err(MovementError::FromOutOfBounds)
-        } else if x2 > 7 || y2 > 7  {
+        } else if x2 > 7 || y2 > 7 {
             Err(MovementError::ToOutOfBounds)
         } else {
-            Ok(Move {
-                x1, y1, x2, y2
-            })
+            Ok(Move { x1, y1, x2, y2 })
         }
     }
 

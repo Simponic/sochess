@@ -53,34 +53,70 @@ impl TryFrom<char> for ColoredPiece {
                 'r' => Piece::Rook,
                 'q' => Piece::Queen,
                 'k' => Piece::King,
-                _ => return Err(format!("'value' is not a recognized letter"))
-            }
+                _ => return Err(format!("'value' is not a recognized letter")),
+            },
         })
     }
 }
 
 #[cfg(test)]
 mod test {
-    use crate::{Piece::*, ColoredPiece};
+    use crate::{ColoredPiece, Piece::*};
 
     #[test]
     fn white_pieces() {
-        assert_eq!(ColoredPiece::try_from('P').unwrap(), ColoredPiece::white(Pawn));
-        assert_eq!(ColoredPiece::try_from('N').unwrap(), ColoredPiece::white(Knight));
-        assert_eq!(ColoredPiece::try_from('B').unwrap(), ColoredPiece::white(Bishop));
-        assert_eq!(ColoredPiece::try_from('R').unwrap(), ColoredPiece::white(Rook));
-        assert_eq!(ColoredPiece::try_from('Q').unwrap(), ColoredPiece::white(Queen));
-        assert_eq!(ColoredPiece::try_from('K').unwrap(), ColoredPiece::white(King));
+        assert_eq!(
+            ColoredPiece::try_from('P').unwrap(),
+            ColoredPiece::white(Pawn)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('N').unwrap(),
+            ColoredPiece::white(Knight)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('B').unwrap(),
+            ColoredPiece::white(Bishop)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('R').unwrap(),
+            ColoredPiece::white(Rook)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('Q').unwrap(),
+            ColoredPiece::white(Queen)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('K').unwrap(),
+            ColoredPiece::white(King)
+        );
     }
 
     #[test]
     fn black_pieces() {
-        assert_eq!(ColoredPiece::try_from('p').unwrap(), ColoredPiece::black(Pawn));
-        assert_eq!(ColoredPiece::try_from('n').unwrap(), ColoredPiece::black(Knight));
-        assert_eq!(ColoredPiece::try_from('b').unwrap(), ColoredPiece::black(Bishop));
-        assert_eq!(ColoredPiece::try_from('r').unwrap(), ColoredPiece::black(Rook));
-        assert_eq!(ColoredPiece::try_from('q').unwrap(), ColoredPiece::black(Queen));
-        assert_eq!(ColoredPiece::try_from('k').unwrap(), ColoredPiece::black(King));
+        assert_eq!(
+            ColoredPiece::try_from('p').unwrap(),
+            ColoredPiece::black(Pawn)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('n').unwrap(),
+            ColoredPiece::black(Knight)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('b').unwrap(),
+            ColoredPiece::black(Bishop)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('r').unwrap(),
+            ColoredPiece::black(Rook)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('q').unwrap(),
+            ColoredPiece::black(Queen)
+        );
+        assert_eq!(
+            ColoredPiece::try_from('k').unwrap(),
+            ColoredPiece::black(King)
+        );
     }
 
     #[test]
