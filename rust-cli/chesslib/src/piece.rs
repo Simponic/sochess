@@ -59,12 +59,37 @@ impl TryFrom<char> for ColoredPiece {
     }
 }
 
+impl From<ColoredPiece> for char {
+    fn from(piece: ColoredPiece) -> Self {
+        let ch = match piece.piece {
+            Piece::Pawn => 'p',
+            Piece::Knight => 'n',
+            Piece::Bishop => 'b',
+            Piece::Rook => 'r',
+            Piece::Queen => 'q',
+            Piece::King => 'k',
+        };
+        
+        if piece.color == Color::White {
+            ch.to_ascii_uppercase()
+        } else {
+            ch
+        }
+    }
+}
+
+impl ToString for ColoredPiece {
+    fn to_string(&self) -> String { 
+        char::from(*self).to_string()
+    }
+}
+
 #[cfg(test)]
 mod test {
     use crate::{ColoredPiece, Piece::*};
 
     #[test]
-    fn white_pieces() {
+    fn white_pieces_to_chars() {
         assert_eq!(
             ColoredPiece::try_from('P').unwrap(),
             ColoredPiece::white(Pawn)
@@ -92,7 +117,7 @@ mod test {
     }
 
     #[test]
-    fn black_pieces() {
+    fn black_pieces_from_chars() {
         assert_eq!(
             ColoredPiece::try_from('p').unwrap(),
             ColoredPiece::black(Pawn)
@@ -116,6 +141,34 @@ mod test {
         assert_eq!(
             ColoredPiece::try_from('k').unwrap(),
             ColoredPiece::black(King)
+        );
+    }
+
+    #[test]
+    fn pieces_from_chars() {
+        assert_eq!(
+            char::from(ColoredPiece::black(King)),
+            'k'
+        );
+        assert_eq!(
+            char::from(ColoredPiece::black(Rook)),
+            'r'
+        );
+        assert_eq!(
+            char::from(ColoredPiece::black(Knight)),
+            'n'
+        );
+        assert_eq!(
+            char::from(ColoredPiece::white(Pawn)),
+            'P'
+        );
+        assert_eq!(
+            char::from(ColoredPiece::white(Queen)),
+            'Q'
+        );
+        assert_eq!(
+            char::from(ColoredPiece::white(Bishop)),
+            'B'
         );
     }
 

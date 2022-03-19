@@ -1,6 +1,6 @@
-use std::ops::{Deref, Index, IndexMut};
+use std::{ops::{Deref, Index, IndexMut}, fmt::{Display, Formatter, Write}};
 
-use crate::{ColoredPiece, Move, MovementError};
+use crate::{ColoredPiece, Move};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum BoardSquare {
@@ -22,21 +22,35 @@ impl From<ColoredPiece> for BoardSquare {
     }
 }
 
+impl Display for BoardSquare {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
+        if let BoardSquare::Full(cp) = self {
+            f.write_char(' ')?;
+            f.write_char((*cp).into())?;
+            f.write_char(' ')?;
+        } else {
+            f.write_str("   ")?;
+        }
+
+        Ok(())
+    }
+}
+
 #[derive(Debug, PartialEq, Eq)]
 pub struct Board {
     squares: [BoardSquare; 64],
 }
 
 impl Board {
-    pub fn standard() -> Board {
+    pub fn new() -> Board {
         Board::from_board_string(
             r#"
 rnbqkbnr
 pppppppp
-
-
-
-
+        
+        
+        
+        
 PPPPPPPP
 RNBQKBNR
 "#,
@@ -96,6 +110,16 @@ RNBQKBNR
             let (x, y) = before;
             Err(format!("Before location ({x}, {y}) is vacant."))
         }
+    }
+
+    pub fn squares(&self) -> &[BoardSquare] {
+        &self.squares
+    }
+}
+
+impl Default for Board {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
