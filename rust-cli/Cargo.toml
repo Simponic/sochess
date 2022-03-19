@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 chesslib = { path = "chesslib" }
+tui = "0.17"
+crossterm = "0.22"

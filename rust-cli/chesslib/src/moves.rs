@@ -7,18 +7,20 @@ pub struct Move {
 }
 
 impl Move {
-    pub fn with_coords(before: (usize, usize), after: (usize, usize)) -> Result<Move, MovementError> {
+    pub fn with_coords(before: (usize, usize), after: (usize, usize)) -> Result<Move, String> {
         let (x1, y1) = before;
         let (x2, y2) = after;
 
-        if x1 > 7 || y1 > 7  {
-            Err(MovementError::FromOutOfBounds)
-        } else if x2 > 7 || y2 > 7  {
-            Err(MovementError::ToOutOfBounds)
+        if x1 > 7 || y1 > 7 {
+            Err(format!(
+                "before position ({x1}, {y1}) out of range of board."
+            ))
+        } else if x2 > 7 || y2 > 7 {
+            Err(format!(
+                "after position ({x1}, {y1}) out of range of board."
+            ))
         } else {
-            Ok(Move {
-                x1, y1, x2, y2
-            })
+            Ok(Move { x1, y1, x2, y2 })
         }
     }
 
@@ -31,10 +33,8 @@ impl Move {
     }
 }
 
-#[derive(Copy, Clone)]
-pub enum MovementError {
-    FromOutOfBounds,
-    ToOutOfBounds,
-    PieceDoesNotExist,
-    Occupied,
+impl Into<(usize, usize, usize, usize)> for Move {
+    fn into(self) -> (usize, usize, usize, usize) {
+        (self.x1, self.y1, self.x2, self.y2)
+    }
 }
