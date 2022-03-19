@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Socket.io</title>
+    </head>
+    <body>
+        <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+        <script>
+            let socket;
+            const init = async () => {
+              const token = await fetch("http://localhost:4001/login", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  username: prompt("Username: "),
+                  password: "password"
+                })
+              }).then((x) => x.json())
+                .then((x) => x)
+                .catch((err) => console.log(err));
+              console.log(token);
+              socket = io('ws://localhost:4001', {
+                query: {
+                  token
+                }
+              });
+            }
+            init().then(() => {
+              socket.on('error', (err) => console.log(err));
+              socket.on('created', console.log);
+              socket.on('update', console.log)
+            });
+        </script>
+    </body>
+</html>
