@@ -27,6 +27,10 @@ impl Context {
     pub fn board(&self) -> &Board {
         &self.board
     }
+
+    pub fn turn(&self) -> Color {
+        self.turn
+    }
 }
 
 impl Default for Context {

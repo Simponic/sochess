@@ -8,6 +8,24 @@ pub enum BoardSquare {
     Full(ColoredPiece),
 }
 
+impl BoardSquare {
+    pub fn is_empty(&self) -> bool {
+        if let BoardSquare::Empty = self {
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn is_full(&self) -> bool {
+        if let BoardSquare::Full(_) = self {
+            true
+        } else {
+            false
+        }
+    }
+}
+
 impl TryFrom<char> for BoardSquare {
     type Error = String;
 
@@ -33,6 +51,16 @@ impl Display for BoardSquare {
         }
 
         Ok(())
+    }
+}
+
+impl From<BoardSquare> for char {
+    fn from(value: BoardSquare) -> Self {
+        if let BoardSquare::Full(cp) = value {
+            cp.into()
+        } else {
+            ' '
+        }
     }
 }
 
@@ -98,7 +126,7 @@ RNBQKBNR
         let to = self[after];
 
         if let BoardSquare::Full(_) = from {
-            if let BoardSquare::Full(_) = to {
+            if let BoardSquare::Empty = to {
                 self[before] = to;
                 self[after] = from;
                 Ok(())
