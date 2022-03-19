@@ -14,8 +14,8 @@ class Piece {
 
     serialized = serialized.toLowerCase();
     switch (serialized) {
-//      case "p":
-//        return new Pawn(color);
+      case "p":
+        return new Pawn(color);
       case "r":
         return new Rook(color);
       case "n":

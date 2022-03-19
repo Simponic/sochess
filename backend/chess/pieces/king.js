@@ -1,5 +1,6 @@
 import Piece from './piece.js';
 import Queen from './queen.js';
+import Colors from '../colors.js';
 
 class King extends Piece {
   constructor(x, y, color) {

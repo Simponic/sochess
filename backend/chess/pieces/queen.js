@@ -1,6 +1,7 @@
 import Piece from './piece.js';
 import Bishop from './bishop.js';
 import Rook from './rook.js';
+import Colors from '../colors.js';
 
 class Queen extends Piece {
   constructor(x, y, color) {

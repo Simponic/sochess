@@ -1,4 +1,5 @@
 import Piece from './piece.js';
+import Colors from '../colors.js';
 
 class Knight extends Piece {
   constructor(x, y, color) {

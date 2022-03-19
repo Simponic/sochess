@@ -4,6 +4,7 @@ import Rook from './pieces/rook.js';
 import Bishop from './pieces/bishop.js';
 import Queen from './pieces/queen.js';
 import King from './pieces/king.js';
+import Pawn from './pieces/pawn.js';
 
 class Board {
   constructor(board, dimension=8) {
@@ -12,7 +13,7 @@ class Board {
       [(new Rook(0, 0, Colors.BLACK)), (new Knight(1, 0, Colors.BLACK)), (new Bishop(2, 0, Colors.BLACK)), (new Queen(3, 0, Colors.BLACK)), (new King(4, 0, Colors.BLACK)), (new Bishop(5, 0, Colors.BLACK)), (new Knight(6, 0, Colors.BLACK)), (new Rook(7, 0, Colors.BLACK))],
       [null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null],
+      [null, null, (new Pawn(2, 3, Colors.BLACK)), (new Pawn(3, 3, Colors.WHITE)), null, null, null, null],
       [null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null, null],
@@ -25,6 +26,7 @@ class Board {
   }  
 
   isSameColor(x, y, color) {
+    console.log(x, y, color);
     return this.board[y][x]?.color === color;
   }
 
